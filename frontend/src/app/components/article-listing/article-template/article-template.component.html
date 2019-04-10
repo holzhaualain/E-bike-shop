@@ -1,0 +1,23 @@
+
+ <div *ngIf="loading" class="loader"></div>
+   <div class="article-content" (click)="onGoToDetail(article.articleQueryParameter)">
+  <picture>
+    <source media="(min-width: 300px)" srcset="{{rootURL + article.imageURL}}">
+      <img alt="{{article.name}}" [hidden]="loading" (load)="onLoad()" class="article-img" src="{{rootURL + article.imageURL}}" width="100%" height="auto"/>
+       <div class="article-detail-rating">
+      <span *ngFor="let rating of article?.rating; index as i ">
+        <i class="fas fa-star" *ngIf="rating" ></i>
+        <i class="far fa-star" *ngIf="!rating"></i>
+      </span>
+      </div>
+    </picture>
+    <div class="article-data">
+      <p><span class="article-listing-title">{{article.name}}</span><br>
+        <span class="article-listing-descr">{{article.brand}}</span><br>
+        <span class="article-listing-price">CHF {{article.price | amountConverter}}</span>
+      </p>
+      <a class="btn prod-listing" type="button" role="button"  aria-label="Zum Artikel"
+         [routerLink]="['/article-detail/']" [queryParams]="{article:article.articleQueryParameter | trim}" >{{'VIEW-ARTICLE' | translate}}</a>
+    </div><!-- end .article-data -->
+  </div><!-- end .article-content -->
+

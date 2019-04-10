@@ -1,0 +1,29 @@
+<div class="row">
+  <app-breadcrumb></app-breadcrumb>
+  <h2 *ngIf="(articles$ | async)?.length>0">{{'SEARCH-RESULTS' | translate}}</h2>
+  <h3 *ngIf="(articles$ | async)?.length==0 || articles$ === null">{{'NO-ARTICLES-FOUND' | translate}}</h3>
+
+  <div *ngFor="let article of articles$| async | paginate: { itemsPerPage: 6, currentPage: n }">
+    <div class="search-result-wrap">
+
+        <h3 class="search-item-title">{{article?.name}}</h3>
+       <ng-container *ngIf="langService.selectedLanguage==='de'">
+        <p>{{article?.descriptionDE}}</p>
+      </ng-container>
+      <ng-container *ngIf="langService.selectedLanguage==='en'">
+        <p>{{article?.descriptionEN}}</p>
+      </ng-container>
+      <p>
+        <a class="btn prod-listing search-item-btn" type="button" role="button"  aria-label="Zum Artikel"
+           [routerLink]="['/article-detail/']" [queryParams]="{article:article.articleQueryParameter | trim}">{{'VIEW-ARTICLE' | translate}}</a>
+     </div><!-- end .search-result-wrap -->
+  </div>
+  <div [ngClass]="((articles$ | async)?.length==0 || articles$ === null)?'hidden':'show'">
+      <pagination-controls
+      (pageChange)="n = $event"
+       previousLabel="{{'BACK' | translate}}"
+      nextLabel="{{'NEXT' | translate}}">
+    </pagination-controls>
+  </div>
+ </div>
+

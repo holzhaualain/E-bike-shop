@@ -1,0 +1,42 @@
+@import '../../../sass/mixins.scss';
+@import '../../../sass/variables.scss';
+
+
+/*
+    top-bar search form ////////////////////////////////////////////////////////////////////////////////////////////////
+ */
+
+.search-form {
+  height: 40px;
+ }
+
+.topNavInput {
+  position: relative;
+  width: auto;
+  height: 25px;
+
+}
+
+.suchbegriff {
+  width: 170px;
+  padding: 5px 0 0 5px;
+  border: #9a9888 1px solid;
+
+}
+
+.suchenFormSubmit {
+  display: block;
+  float: right;
+  left: 120px;
+  width: 18px;
+  height: 16px;
+  margin: 3px;
+}
+
+
+@media screen and (max-width: 562px) {
+  .top-bar-search {
+    width: 130px;
+  }
+}
+

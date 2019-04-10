@@ -1,0 +1,185 @@
+@import '../../../../sass/mixins';
+@import '../../../../sass/variables';
+
+/*
+    shopping basket listing ////////////////////////////////////////////////////////////////////////////////////////////////
+ */
+
+.cart-result-wrap {
+  @include flex;
+  justify-content: flex-end;
+  margin: 45px 0 0 0;
+}
+
+
+.cart-result {
+  margin: 0 14.444444% 0 0;
+}
+
+.result-text {
+  display: inline-block;
+  width: 51.7788888%;
+}
+
+.add-to-chart {
+  @include flex();
+}
+
+button.minus, button.plus {
+  @include font-size($sizeValue:1.6);
+  display: inline-block;
+  font-weight: 200;
+  padding: 5px 12px;
+  color: #779BA0;
+  background-color: #fff;
+  border: 1px solid #ccc;
+
+}
+
+.cart-article-count {
+  text-align: center;
+  padding: 0;
+  margin: 0;
+  width: 60px;
+  cursor: default;
+}
+
+table.shopping-basket-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+
+table.shopping-basket-table tr:nth-of-type(odd) {
+  background: #eeeeee;
+}
+
+table.shopping-basket-table th {
+  @include base-font-style();
+  font-weight: $font-weight-medium;
+  color: $font-color;
+  background: #fff;
+
+
+}
+table.shopping-basket-table td,
+table.shopping-basket-table th {
+  padding: 0.8em;
+  text-align: left;
+  width:auto;
+}
+
+table.shopping-basket-table td {
+  @include font-size($sizeValue:1.6);
+}
+
+table.shopping-basket-table tfoot tr:nth-of-type(odd) {
+  background: #fff;
+}
+
+.amount-spacer {
+  display: inline-block;
+  min-width: 90px;
+  text-align: right;
+}
+
+table.shopping-basket-table td.img-row {
+  width: 180px;
+}
+
+.article-amount {
+  display: block;
+  width: 125px;
+}
+
+@media screen and (max-width: 1024px)  {
+
+  .cart-result-wrap {
+    justify-content: flex-start;
+  }
+
+  .cart-result {
+    margin: 0;
+  }
+  .cart-next-wrap {
+    float: left;
+
+  }
+  button#count {
+    height: 40px;
+
+  }
+
+  table.shopping-basket-table,
+  table.shopping-basket-table tbody,
+  table.shopping-basket-table tfoot,
+  table.shopping-basket-table th,
+  table.shopping-basket-table td,
+  table.shopping-basket-table tr {
+    display: block;
+  }
+
+  table.shopping-basket-table thead tr {
+    position: absolute;
+    top: -9999px;
+    left: -9999px;
+  }
+
+  table.shopping-basket-table td,
+  table.shopping-basket-table th {
+    width: auto;
+  }
+
+  table.shopping-basket-table td {
+
+    border: none;
+    position: relative;
+    padding-left: 50%;
+  }
+
+  table.shopping-basket-table  td:before {
+    position: absolute;
+    top: 6px;
+    left: 6px;
+    width: 45%;
+    padding-right: 10px;
+    white-space: nowrap;
+  }
+
+  .basket-total-amount {
+    padding: 0;
+  }
+  .result-text {
+    width: 100%;
+    margin: 10px 0 0 0;
+  }
+
+  table.shopping-basket-table td.img-row {
+    display: inline-table;
+    margin: 5px;
+  }
+
+  table.shopping-basket-table  td.table-xs-hidden {
+    display: none;
+  }
+  /*
+  Label checkout mobile de
+  */
+  td.de:nth-of-type(2):before { content: "Artikelnummer"; }
+  td.de:nth-of-type(3):before { content: "Artikel"; }
+  td.de:nth-of-type(4):before { content: "Preis"; }
+  td.de:nth-of-type(5):before { content: "Anzahl"; }
+  td.de:nth-of-type(6):before { content: "Summe Artikel"; }
+  /*
+  Label checkout mobile en
+  */
+  td.en:nth-of-type(2):before { content: "item number"; }
+  td.en:nth-of-type(3):before { content: "article"; }
+  td.en:nth-of-type(4):before { content: "price"; }
+  td.en:nth-of-type(5):before { content: "amount"; }
+  td.en:nth-of-type(6):before { content: "sum article"; }
+
+
+}
+
+

@@ -1,0 +1,31 @@
+<div class="row">
+  <h2 class="claim">{{'HOME-INTRODUCTION-1' | translate}}</h2>
+</div><!-- end .row -->
+<div class="row">
+  <h3 *ngIf="(articles$ | async)?.length>0">{{'ARTICLES_NEW' | translate}}</h3>
+  <h3 *ngIf="(articles$ | async)?.length==0">{{'NO-ARTICLES-FOUND' | translate}}</h3>
+  <div class="article-listing">
+    <app-article-template class="article-container" *ngFor="let item of articles$ | async" [article]="item">
+    </app-article-template><!-- end .article-container -->
+  </div><!-- end .article-listing -->
+</div><!-- end .row -->
+
+<div class="row">
+  <h2 class="claim">{{'HOME-INTRODUCTION-2' | translate}}</h2>
+</div><!-- end .row -->
+<div class="row">
+  <div class="frontpage-content-row clearfix ">
+    <div class="frontpage-content">
+      <img class="float-left" src="./assets/images/home-1.jpg" width="100%" height="auto">
+       <h3>{{'HOME-INTRODUCTION-3-TITLE' | translate}}</h3>
+        <p>{{'HOME-INTRODUCTION-3' | translate}}</p>
+      </div><!-- .frontpage--content -->
+  </div><!-- .frontpage--content--row -->
+  <div class="frontpage-content-row clearfix">
+    <div class="frontpage-content">
+      <img class="float-right" src="./assets/images/home-2.jpg" width="100%" height="auto">
+      <h3>{{'HOME-INTRODUCTION-4-TITLE' | translate}}</h3>
+      <p>{{'HOME-INTRODUCTION-4' | translate}}</p>
+    </div><!-- .frontpage--content -->
+  </div><!-- .frontpage--content--row -->
+</div><!-- end .row -->

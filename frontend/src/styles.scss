@@ -1,0 +1,507 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto:300,400,500');
+@import url('https://fonts.googleapis.com/css?family=Archivo:400,700');
+
+@import './sass/mixins';
+@import './sass/variables';
+@import './sass/animations';
+@import './sass/custom-material-theme';
+@import './sass/angular-material';
+
+  /*
+      resets  /////////////////////////////////////////////////////////////////////////////////////////////////////////
+   */
+
+  * {
+    margin: 0;
+    padding: 0;
+    border: none;
+    outline: none;
+  }
+
+  *  {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+  }
+
+  .hover {
+    -webkit-user-select: none;
+    -webkit-touch-callout: none;
+
+  }
+
+  img {
+    border: 0;
+  }
+
+  /*
+      construct  /////////////////////////////////////////////////////////////////////////////////////////////////////////
+   */
+
+  html, body {
+    height: 100%;
+    font-size: $base-font-size;
+
+  }
+
+  body {
+    font-family: $base-font-family;
+    font-weight: $font-weight-light;
+    @include flex;
+    justify-content: center;
+    color: $font-color;
+  }
+
+
+  .wrapper {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: auto 1fr auto;
+    grid-gap: 1px;
+    grid-template-areas: "header" "content" "footer";
+    width: 100%;
+    height: 100%;
+
+  }
+
+  header {
+    grid-area: header;
+    margin: 0 0 35px 0;
+    background: $orange;
+
+  }
+
+  section.content {
+    grid-area: content;
+  }
+
+  footer {
+    grid-area: footer;
+    background-color: $orange;
+  }
+
+  button, html input[type="button"], input[type="reset"], input[type="submit"] {
+    -webkit-appearance: button;
+    cursor: pointer;
+  }
+
+main {
+  margin: 60px 0 0 0;
+}
+
+  /*
+      fonts, list items /////////////////////////////////////////////////////////////////////////////////////////////////////////
+   */
+
+  h1, h2, h3, h4 {
+    font-weight: $font-weight-medium;
+    padding: 0 0 2rem;
+  }
+
+  h1 {
+    @include font-size($sizeValue:4.2);
+  }
+
+  h2 {
+    @include font-size($sizeValue:3.2);
+
+
+  }
+
+  h3 {
+    @include font-size($sizeValue:2.8);
+
+  }
+
+  h4 {
+    @include font-size($sizeValue:2);
+    font-weight: $font-weight-medium;
+  }
+
+  p {
+    @include base-font-style();
+    font-weight: $font-weight-light;
+  }
+
+  a {
+    text-decoration: none;
+    color: $green;
+  }
+
+  a:hover {
+    color:  #000;
+  }
+
+  li {
+    @include base-font-style();
+    list-style-type: none;
+  }
+
+/*
+    rows, cols ////////////////////////////////////////////////////////////////////////////////////////////////
+ */
+
+.row {
+  max-width:1220px;
+  margin: 0 auto;
+  padding: 0 10px;
+
+}
+.content .row {
+
+    margin: 0 auto 45px auto;
+
+}
+
+/*
+    styles used in serveral components ////////////////////////////////////////////////////////////////////////////////////////////////
+ */
+
+.article-listing {
+  @include flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin: 0 -10px;
+}
+
+.article-container {
+  padding: 0 5px;
+  margin: 0 0 10px 0;
+  width: 25%;
+}
+
+
+@media screen and (max-width: 662px){
+  .article-container {
+    width: 50%;
+  }
+}
+@media screen and (max-width: 498px){
+  .article-container {
+    width: 100%;
+  }
+}
+
+.form-customer-data {
+  display: inherit;
+  flex-flow: row wrap;
+  width: 100%;
+}
+
+.customer-order {
+  @include flex;
+  justify-content: space-between;
+}
+
+
+.order-customer-articles {
+  width: 65%;
+}
+
+.customer-data {
+   width: 35%;
+}
+
+
+.customer-data-input {
+  height: 30px;
+  margin: 0;
+  padding: 0;
+}
+
+.customer-data-input .mat-form-field-wrapper, .overview-select {
+  max-width: 200px;
+}
+
+.order-review span, .review-data {
+  font-weight: $font-weight-bold;
+  display: inline-block;
+  width: 150px;
+  margin: 10px 0 0 0;
+}
+
+
+.order-item-listing {
+  @include flex;
+  justify-content: space-between;
+
+}
+
+.order-item {
+  width: 31.3333%;
+  margin: 0 0 15px 0;
+  padding: 0 0 15px 0;
+  border-bottom: 1px solid $dark-grey;
+}
+
+.order-article-attr {
+  font-weight: $font-weight-bold;
+  display: inline-block;
+  width: 100%;
+}
+@media screen and (max-width: 916px) {
+  .customer-wrap{
+   display: flex;
+    flex-flow: row wrap;
+  }
+
+  .order-review span, .review-data, .customer-data {
+     width: 100%;
+  }
+  .order-customer-articles, .order-customer-data  {
+    margin: 25px 0 0 0;
+    width: 100%;
+  }
+
+  .order-item {
+     width: 49%;
+  }
+
+}
+
+@media screen and (max-width: 610px){
+
+  .order-item {
+    width: 100%;
+  }
+
+}
+/*
+    buttons  ////////////////////////////////////////////////////////////////////////////////////////////////
+ */
+button, [type="button"], [type="reset"], [type="submit"] {
+  -webkit-appearance: inherit;
+}
+
+a.btn, button.btn {
+  @include base-font-style();
+  font-weight: $font-weight-light;
+  display: block;
+  text-align: center;
+  color: #fff;
+  width: 100%;
+  padding: 15px 0;
+  margin: 15px 0;
+  background-color: $green;
+  cursor:pointer;
+
+}
+
+a.btn:hover, .form-btn:hover {
+  color: #000;
+}
+
+.prod-listing::after, .btn-form-text::after {
+  font-family: 'Font Awesome 5 Free', sans-serif;
+  font-weight: 900;
+  line-height: inherit;
+  vertical-align: baseline;
+  content: "\f061";
+  margin: 0 0 0 25px;
+}
+
+.form-btn {
+  max-width: 275px;
+}
+
+.btn-confirm-wrap {
+  display: flex;
+  justify-content: space-around;
+}
+
+button.btn-confirm {
+  width: 45%;
+}
+
+button.btn-warning {
+  background-color: $color-error;
+
+}
+
+/*
+    forms ////////////////////////////////////////////////////////////////////////////////////////////////
+ */
+
+label {
+  display: block;
+  @include font-size($sizeValue:1.4);
+  width: 100%;
+}
+
+input {
+  @include font-size($sizeValue:1.6);
+  @include line-height($heightValue:2.4);
+  margin: 5px 0 15px 0;
+  padding: 5px;
+  width: 100%;
+  border: 1px solid #ccc;
+}
+
+select {
+  border: 1px solid #ccc;
+}
+
+::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+  color: #ccc;
+  opacity: 1; /* Firefox */
+}
+
+:-ms-input-placeholder { /* Internet Explorer 10-11 */
+  color: #ccc;
+}
+
+::-ms-input-placeholder { /* Microsoft Edge */
+  color: #ccc;
+}
+
+
+/*
+    messages ////////////////////////////////////////////////////////////////////////////////////////////////
+ */
+.alert {
+  text-align: center;
+  padding: 10px;
+}
+
+.danger {
+  color: #fff;
+  border: 1px solid $color-error;
+  background-color: $color-error;
+}
+
+.mat-simple-snackbar {
+  @include font-size($sizeValue:2.4);
+  @include line-height($heightValue:3.7 );
+  color: #ffffff;
+  width: 100%;
+  margin: 20px 0 0 0;
+  min-height: 50px;
+}
+
+.snackbar-info span{
+  color: $green;
+}
+.snackbar-warning span{
+  color: $color-warning;
+}
+.snackbar-error span{
+  color: $color-error;
+}
+/*
+    misc ////////////////////////////////////////////////////////////////////////////////////////////////
+ */
+
+.fas, .far {
+  margin: 0 0.5em 0;
+}
+
+.fa-search {
+  margin: 10px 5px 0 0;
+  cursor: pointer;
+  color: $dark-secondary-text;
+}
+
+.fa-shopping-cart {
+  padding: 0;
+}
+
+.fa-eye:hover {
+  cursor: pointer;
+}
+
+.fa-star {
+  color: gold;
+}
+
+.fa-thumbs-up, .fa-thumbs-down {
+  margin: 0 0.5em 0 0.5em;
+}
+
+.fa-times {
+  @include base-font-style();
+  color: $color-error;
+  float:right;
+  cursor: pointer;
+}
+
+@media screen and(max-width: 562px) {
+  .fa-user-circle {
+    font-size: 3rem;
+  }
+
+}
+
+
+.stepper-edit {
+  margin: 0 5px 0 0;
+}
+
+.no-bg {
+  background-color: transparent;
+}
+
+.bottom {
+  position: absolute;
+  bottom: 0;
+}
+
+@media screen and (max-width: 590px){
+  .bottom {
+    position: relative;
+   }
+}
+
+.float-left {
+  float: left;
+}
+
+.float-right {
+  float: right;
+}
+
+.warning{
+  color: $color-error;
+}
+
+.hidden {
+  display: none;
+}
+
+.show {
+  display: block;
+}
+
+.white {
+  color: #ffffff;
+}
+
+.form-icon {
+  font-size: 1.7rem;
+  display: block;
+  margin: 0;
+
+}
+
+@media screen and (max-width: 562px) {
+  .hidden-ms {
+    display: none;
+  }
+}
+
+.clearfix:after {
+  visibility: hidden;
+  display: block;
+  font-size: 0;
+  content: " ";
+  clear: both;
+  height: 0;
+}
+* html .clearfix             { zoom: 1; } /* IE6 */
+*:first-child+html .clearfix { zoom: 1; } /* IE7 */
+
+/*needs important to overwrite compoents encapsulated styles, mimimimim */
+.position-fixed {
+  position: fixed !important;
+  z-index: 99;
+  top: 0;
+}

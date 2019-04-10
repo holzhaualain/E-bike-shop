@@ -1,0 +1,29 @@
+<header>
+  <app-top-bar ></app-top-bar>
+  <div class="top-banner">
+    <div class="bg-main-nav" [ngClass]="{'position-fixed': currentWindowWidth <= 562 && windowTopPosition > 155}"></div><!-- end #main-nav-wrap -->
+    <nav class="main-nav" aria-role="navigation" [ngClass]="{'position-fixed': currentWindowWidth <= 562 && windowTopPosition > 155}">
+      <div class="hamburger" (click)="hamburger()">
+        <div class="hamburge-line1"></div>
+        <div class="hamburge-line2"></div>
+        <div class="hamburge-line3"></div>
+      </div>
+      <ul>
+        <li><a routerLinkActive="active" role="link" title="{{'HOME' | translate}}" routerLink="/home" (click)="hamburger()">{{'HOME' | translate}}</a></li>
+        <li><a routerLinkActive="active" role="link" title="{{'ARTICLES' | translate}}" routerLink="/article-listing" (click)="hamburger()">{{'ARTICLES' | translate}}</a></li>
+        <li><a routerLinkActive="active" role="link" title="{{'MY-ORDERS' | translate}}" routerLink="/my-orders" (click)="hamburger()">{{'ORDERS' | translate}}</a></li>
+      </ul>
+    </nav>
+    <div class="banner" [ngClass]="showBanner?'show':'hidden'">
+      <h2 class="headline">
+        <span class="part1">The road</span>
+        <span class="part2">is yours</span>
+      </h2>
+      <picture>
+        <source media="(min-width: 475px)" srcset="./assets/images/header.jpg">
+        <source media="(min-width: 300px)" srcset="./assets/images/header-mobile.jpg">
+        <img src="./assets/images/header.jpg" width="100%" height="auto">
+      </picture>
+    </div><!-- end #banner -->
+  </div><!-- end .top-banner -->
+</header>

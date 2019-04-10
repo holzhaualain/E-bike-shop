@@ -1,0 +1,16 @@
+@import '../../../../sass/mixins';
+@import '../../../../sass/variables';
+
+/*
+    lang-switch /////////////////////////////////////////////////////////////////////////////////////////////////////////
+ */
+
+.langSwitch {
+  cursor: pointer;
+
+}
+
+.currLang {
+  font-weight: $font-weight-bold;
+}
+

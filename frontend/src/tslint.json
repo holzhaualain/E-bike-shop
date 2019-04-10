@@ -1,0 +1,60 @@
+{
+  "extends": "../tslint.json",
+  "rules": {
+    "directive-selector": [
+      true,
+      "attribute",
+      "app",
+      "camelCase"
+    ],
+    "component-selector": [
+      true,
+      "element",
+      "app",
+      "kebab-case"
+    ],
+    "member-access": [
+      true,
+      "public"
+    ],
+    "typedef": [
+      true,
+      "call-signature",
+      "property-declaration",
+      "variable-declaration",
+      "member-variable-declaration"
+    ],
+    "no-inferrable-types": [
+      false
+    ],
+    "quotemark": [
+      true,
+      "single",
+      "avoid-template",
+      "avoid-escape"
+    ]
+  },
+  "triple-equals": [
+    true,
+    "allow-null-check"
+  ],
+  "prefer-conditional-expression": [
+    true,
+    "check-else-if"
+  ],
+  "no-trailing-spaces":
+    [2, { "skipBlankLines": true }
+    ],
+  "no-shadowed-variable": [
+    true,
+    {
+      "class": true,
+      "enum": true,
+      "function": true,
+      "interface": false,
+      "namespace": false,
+      "typeAlias": false,
+      "typeParameter": false
+    }
+  ]
+}

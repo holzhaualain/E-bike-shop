@@ -1,0 +1,52 @@
+@import '../../../sass/mixins.scss';
+@import '../../../sass/variables.scss';
+
+
+/*
+    my account  ////////////////////////////////////////////////////////////////////////////////////////////////
+ */
+
+.login-form-wrap {
+  display: flex;
+  flex-flow: row wrap;
+  max-width: 600px;
+}
+
+.login-form, .new-account-form {
+  position: relative;
+  width: 50%;
+  min-height: 320px;
+}
+
+.login-form {
+  padding: 0 15px 0 0;
+}
+
+.new-account-form {
+  padding: 0 0 0 15px;
+  border-left: 1px solid #ccc;
+}
+
+@media screen and (max-width: 590px){
+  .login-form {
+    margin: 0 0 25px 0;
+    padding: 0 0 15px 0;
+    border-right: 0 solid transparent;
+    border-bottom: 1px solid #ccc;
+  }
+  .login-form, .new-account-form {
+    width: 100%;
+    min-height: inherit;
+
+  }
+
+  .login-form-wrap {
+    flex-direction: column;
+  }
+
+    .new-account-form {
+    border-left: none;
+    padding: 0;
+  }
+
+}

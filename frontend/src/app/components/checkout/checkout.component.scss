@@ -1,0 +1,32 @@
+@import '../../../sass/mixins.scss';
+@import '../../../sass/variables.scss';
+
+
+/*
+    checkout ////////////////////////////////////////////////////////////////////////////////////////////////
+ */
+
+.cart-next-wrap {
+  float: right;
+  width: 250px;
+  margin: 50px 0 0 0;
+
+}
+.nav-wrap {
+  max-width: 200px;
+}
+
+.checkout-nav {
+  @include flex;
+  justify-content: space-between;
+ }
+
+@media screen and (max-width: 420px){
+  #checkout-review{
+    margin: 0 0 0 -56px;
+  }
+}
+
+button.btn-checkout {
+  max-width: 200px ;
+}

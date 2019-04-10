@@ -1,0 +1,184 @@
+<div class="row">
+  <app-breadcrumb></app-breadcrumb>
+  <h2>{{'MY-ORDERS' | translate}}</h2>
+
+  <mat-tab-group>
+    <mat-tab label="{{'MY-ORDERS' | translate}}">
+      <h4 class="sub-title">{{'MY-ORDERS' | translate}}</h4>
+  <ng-container *ngIf="orders?.length === 0">
+    <p>{{'NO-ORDERS-FOUND' | translate}}</p>
+  </ng-container>
+  <ng-container *ngIf="orders?.length > 0">
+    <div *ngFor="let order of orders | paginate: { itemsPerPage: 6, currentPage: p };" >
+      <ng-container>
+
+        <mat-accordion>
+          <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
+            <mat-expansion-panel-header>
+              <mat-panel-title>
+               <strong> {{'ORDERED-ON' | translate}}:&nbsp;</strong> {{order.orderDate | date:'dd.MM.yyyy'}}
+              </mat-panel-title>
+              <mat-panel-description>
+                <strong>{{'STATE' | translate}}:&nbsp;</strong> {{order.state | translate}}
+              </mat-panel-description>
+            </mat-expansion-panel-header>
+
+            <div class="customer-order">
+
+              <div class="customer-data">
+                <h4>{{'MY-ORDER-DATA' | translate}}</h4>
+              <div class="customer-wrap">
+               <div class="first-order-data">
+                <p>
+                  <span class="review-data">{{'FIRST-NAME' | translate}}: </span>
+                  <span>{{order.deliveryAddress.givenname}}</span>
+                </p>
+
+                <p><span class="review-data">{{'LAST-NAME' | translate}}: </span>
+                  <span>{{order.deliveryAddress.surname}}</span>
+
+                </p>
+                <p><span class="review-data">{{'STREET' | translate}}: </span>
+                  <span>{{order.deliveryAddress.streetHousenumber}}</span>
+
+                </p>
+                <p><span class="review-data">{{'POST-CODE' | translate}}: </span>
+                  <span>{{order.deliveryAddress.postCode}}</span>
+
+                </p>
+                <p><span class="review-data">{{'CITY' | translate}}: </span>
+                  <span>{{order.deliveryAddress.city}}</span>
+                </p>
+               </div><!-- end .first-customer-data -->
+
+                <div class="second-order-data">
+                <p><span class="review-data">{{'E-MAIL' | translate}}: </span>
+                  <span>{{order.contactData.email}}</span>
+
+                </p>
+                <p><span class="review-data">{{'PHONE' | translate}}: </span>
+                  <span>{{order.contactData.phone}}</span>
+
+                </p>
+
+                <p><span class="review-data">{{'DELIVERY' | translate}}: </span>
+                  <span>{{order.deliveryType.delivery}}</span>
+
+                </p>
+
+                <p><span class="review-data">{{'PAYING-WITH' | translate}}: </span>
+                  <span>{{order.paymentType.payment}}</span>
+                </p>
+                   </div><!-- end .customer-wrap -->
+                </div><!-- end .second-customer-data -->
+              </div><!-- end .customer-data -->
+              <div class="order-customer-articles">
+
+                <h4>{{'ORDERED-ITEMS' | translate}}</h4>
+                <div class="order-item-listing">
+                  <div class="order-item" *ngFor="let item of order.shoppingBasket.items">
+                    <a [routerLink]="['/article-detail/']" [queryParams]="{article:item.articleBrand+'-'+item.articleName | trim}" >
+                      <img alt="{{item.articleName}}" src="{{rootURL+item.imageURL}}" width="100%" height="auto">
+                    </a>
+                       <p><span class="order-article-attr">{{'ITEM-NUMBER' | translate}}:</span>{{item.itemNumber}}</p>
+                    <p><span class="order-article-attr">{{'AMOUNT' | translate}}:</span>{{item.articleAmount}}
+                    </p>
+                    <p><span class="order-article-attr">{{'PRICE' | translate}}:</span>CHF {{item.articlePrice |
+                      amountConverter}}</p>
+                    <p><span class="order-article-attr">{{'SUM-ARTICLE' | translate}}:</span>CHF {{item.articlePriceSum |
+                      amountConverter}}</p>
+
+                     </div><!-- end .-order-item -->
+                </div><!-- end .order-item-listing -->
+                <p><span class="order-article-attr">{{'TOTAL' | translate}}</span>CHF {{order.shoppingBasket.totalSum |
+                  amountConverter}} </p>
+              </div><!-- end .order-customer-articles -->
+            </div><!-- end .customer-data -->
+          </mat-expansion-panel>
+        </mat-accordion>
+      </ng-container>
+
+    </div>
+
+
+    <br>
+    <pagination-controls
+      (pageChange)="p = $event"
+      previousLabel="{{'BACK' | translate}}"
+      nextLabel="{{'NEXT' | translate}}"></pagination-controls>
+  </ng-container>
+    </mat-tab>
+
+     <mat-tab label="{{'PARTICULARS' | translate}}">
+
+       <div class="customer-order personal-data-wrap" *ngIf="isCDataLoaded">
+         <form #userForm="ngForm" class="form-customer-data">
+
+           <div class="customer-data">
+             <h4>{{'PARTICULARS' | translate}} <span class="warning hidden
+          {{customerPersonalData._id}}">{{'WARNING-MY-DATA-CHANGED' | translate}}</span>
+             </h4>
+             <input type="hidden" name="user_id" [(ngModel)]="customerPersonalData._id" #user_id>
+             <p>
+               <span class="review-data">{{'FIRST-NAME' | translate}}: </span>
+               <mat-form-field class="customer-data-input">
+                 <input matInput placeholder=""
+                        (change)="onFormChange(customerPersonalData._id);"
+                        name="name"
+                        [(ngModel)]="customerPersonalData.name"
+                        #name
+                        required>
+                 <mat-icon matSuffix><i class="far fa-grin-beam form-icon"></i></mat-icon>
+               </mat-form-field>
+             </p>
+             <p>
+               <span class="review-data">{{'LAST-NAME' | translate}}: </span>
+               <mat-form-field class="customer-data-input">
+                 <input matInput placeholder=""
+                        (change)="onFormChange(customerPersonalData._id);"
+                        name="firstname"
+                        [(ngModel)]="customerPersonalData.firstname"
+                        #firstname
+                        required>
+                 <mat-icon matSuffix><i class="far fa-grin-beam form-icon"></i></mat-icon>
+               </mat-form-field>
+             </p>
+             <p>
+               <span class="review-data">{{'E-MAIL' | translate}}: </span>
+               <mat-form-field class="customer-data-input">
+                 <input matInput placeholder=""
+                        (change)="onFormChange(customerPersonalData._id);"
+                        name="email"
+                        [(ngModel)]="customerPersonalData.email"
+                        #email
+                        required>
+                 <mat-icon matSuffix> <mat-icon matSuffix><i class="fas fa-envelope form-icon"></i></mat-icon></mat-icon>
+               </mat-form-field>
+             </p>
+             <p>
+               <span class="review-data">{{'PASSWORD' | translate}}: </span>
+               <mat-form-field class="customer-data-input">
+                 <input matInput placeholder=""
+                        (change)="onFormChange(customerPersonalData._id);"
+                        name="pwd"
+                        (ngModel)="customerPersonalData.pwd"
+                        #pwd
+                        required>
+                 <mat-icon matSuffix><i class="fas fa-key form-icon"></i></mat-icon>
+               </mat-form-field>
+             </p>
+
+           </div><!-- end .customer-data -->
+
+
+         </form>
+         <button attr.aria-label="{{'USER-SAVE' | translate}}" (click)="onUpdateUser(userForm)"
+                 class="btn form-btn" type="submit"><i class="fas form-btn"></i>{{'SAVE' | translate}}
+         </button>
+       </div><!-- end .customer-orders -->
+
+     </mat-tab>
+
+  </mat-tab-group>
+</div><!-- end .row -->
+

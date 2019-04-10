@@ -1,0 +1,38 @@
+@import '../../../../sass/mixins';
+@import '../../../../sass/variables';
+
+/*
+    bottom basket /////////////////////////////////////////////////////////////////////////////////////////////////////////
+ */
+
+
+.bottom-basket-wrap {
+  font-size: 2rem;
+  text-align: center;
+  position: fixed;
+  bottom: 0;
+  padding: 20px 0;
+   width: 100%;
+  background-color: $dark-grey;
+  color: #fff;
+  z-index: 100;
+
+}
+
+@media screen and (max-width: 562px) {
+  .bottom-basket-wrap {
+      display: none;
+    }
+  }
+.bottom-basket-info a:hover {
+  color: $orange;
+}
+
+.bottom-basket-info a::after {
+  font-family: 'Font Awesome 5 Free', sans-serif;
+  font-weight: 900;
+  line-height: inherit;
+  vertical-align: baseline;
+  content: "\f061";
+  margin: 0 0 0 5px;
+}

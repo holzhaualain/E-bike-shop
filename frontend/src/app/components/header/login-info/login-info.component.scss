@@ -1,0 +1,17 @@
+@import '../../../../sass/mixins';
+@import '../../../../sass/variables';
+
+/*
+    login info  /////////////////////////////////////////////////////////////////////////////////////////////////////////
+ */
+
+.loginInfoContainer__name {
+  font-weight: $font-weight-bold;
+}
+
+
+.loginInfoContainer__logout {
+  cursor: pointer;
+
+}
+

@@ -1,0 +1,31 @@
+<div class="loginInfoContainer">
+
+
+  <ng-container *ngIf="userService.getUser()">
+    <p>
+      <span
+        class="loginInfoContainer__name">{{userService.getUser() ?.name  }} {{userService.getUser()?.firstname}}
+      </span>
+      <i *ngIf="userService.getUser()?.token" (click)="onLogOut().then()"
+         class="fas fa-sign-out-alt loginInfoContainer__logout"
+         matTooltip="{{'LOG-OUT' | translate}}"></i>
+    </p>
+    <p *ngIf="userService.getUser()?.type ==='admin'">
+      <a href="#" class="white" routerLink="/admin/overview">{{'GO-TO-ADMIN' | translate}}</a>
+    </p>
+    <p *ngIf="userService.getUser()?.type !=='admin'">
+      <a href="#" class="white" routerLink="/my-orders">{{'TO-MY-ORDERS' | translate}}</a>
+    </p>
+  </ng-container>
+
+  <ng-container *ngIf="!userService.getUser()">
+    <p class="loginInfoContainer__logout" (click)="onGoToLogIn().then()" matTooltip="{{'LOGIN' | translate}}">
+      <i class="fas fa-user-circle "></i><span class="hidden-ms">{{'MY-ACCOUNT' | translate}}</span>
+    </p>
+  </ng-container>
+
+</div>
+
+
+
+

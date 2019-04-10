@@ -1,0 +1,56 @@
+<div class="row">
+  <app-breadcrumb></app-breadcrumb>
+  <h2>{{'MY-ACCOUNT' | translate}}</h2>
+  <div class="login-form-wrap">
+
+    <form [formGroup]="account" class="form login-form" (ngSubmit)="onLogin().then()">
+      <h4>{{'I-ALREADY-HAVE-AN-ACCOUNT' | translate}}</h4>
+      <mat-form-field>
+        <input aria-label="email" name="loginEmail" matInput type="email" placeholder="{{'E-MAIL' | translate}}"
+               formControlName="email" required autocomplete="on">
+        <mat-icon matSuffix><i class="fas fa-envelope form-icon"></i> </mat-icon>
+      </mat-form-field>
+      <mat-form-field>
+        <input aria-label="password" name="loginPassword" matInput type="password" placeholder="{{'PASSWORD' | translate}}"
+               formControlName="pwd" required autocomplete="on" [type]="showPwlo ? 'password' : 'text'">
+        <mat-icon matSuffix (click)="showPwlo = !showPwlo"><i class="fas fa-eye form-icon"></i></mat-icon>
+      </mat-form-field>
+      <br>
+      <button attr.aria-label="{{'LOGIN' | translate}}" class="btn form-btn bottom" type="submit">
+        <span class="btn-form-text">{{'LOGIN' | translate}}</span> </button>
+      <p class="warning" *ngIf="hideErrorWrong == false">{{'WRONG-EMAIL-OR-PASSWORD' | translate}}</p>
+    </form>
+
+
+    <form [formGroup]="accountNew" class="form new-account-form" (ngSubmit)="onCreate().then()">
+      <h4>{{'CREATE-NEW-ACCOUNT' | translate}}</h4>
+      <mat-form-field>
+        <input aria-label="name" name="accountNewName" matInput placeholder="{{'FIRST-NAME' | translate}}"
+               formControlName="name" autocomplete="on" required>
+        <mat-icon matSuffix><i class="far fa-grin-beam form-icon"></i></mat-icon>
+      </mat-form-field>
+      <mat-form-field>
+        <input aria-label="firstname" name = "accountNewFirstname" matInput placeholder="{{'LAST-NAME' | translate}}"
+               autocomplete="on" formControlName="firstname" required>
+        <mat-icon matSuffix><i class="far fa-grin-beam form-icon"></i></mat-icon>
+      </mat-form-field>
+      <mat-form-field>
+        <input aria-label="email" name = "accountNewEmail" matInput type="email" placeholder="{{'E-MAIL' | translate}}" formControlName="email"
+               required autocomplete="on">
+        <mat-icon matSuffix><i class="fas fa-envelope form-icon"></i> </mat-icon>
+      </mat-form-field>
+      <mat-form-field>
+        <input aria-label="password" name ="accountNewPassword" matInput type="password" placeholder="{{'PASSWORD' | translate}}"
+               formControlName="pwd" required autocomplete="on" [type]="showPwCr ? 'password' : 'text'">
+        <mat-icon matSuffix (click)="showPwCr = !showPwCr"><i class="fas fa-eye form-icon"></i></mat-icon>
+      </mat-form-field>
+      <br>
+      <button attr.aria-label="{{'CREATE-ACCOUNT' | translate}}" class="btn form-btn bottom" type="submit"><span class="btn-form-text">{{'CREATE-ACCOUNT' | translate}}</span></button>
+      <p class="warning" *ngIf="hideErrorTaken == false">{{'EMAIL-ALREADY-TAKEN' | translate}}</p>
+
+    </form>
+
+
+  </div><!-- end .login-form-wrap -->
+
+</div><!-- end .row -->

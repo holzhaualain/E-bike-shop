@@ -1,0 +1,4 @@
+<div class="langSwitchContainer">
+  <p><i [ngClass]="{'langSwitch':'langSwitch', 'currLang': langSwitch }" (click)="onLangChanged(languages[0].code)" >DE</i><span>&nbsp;|</span>
+  <i [ngClass]="{'langSwitch':'langSwitch', 'currLang': !langSwitch }" (click)="onLangChanged(languages[1].code)" >EN</i></p>
+</div>

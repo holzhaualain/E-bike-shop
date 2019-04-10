@@ -1,0 +1,39 @@
+@import '../../../sass/mixins.scss';
+@import '../../../sass/variables.scss';
+
+
+/*
+    footer ////////////////////////////////////////////////////////////////////////////////////////////////
+ */
+
+footer {
+  padding: 25px 0 0 0;
+}
+
+footer .row {
+  @include flex;
+  justify-content: space-between;
+  align-items: flex-start;
+
+}
+
+footer .col {
+  margin: 0 0 35px 0;
+}
+footer a {
+  color: $font-color;
+}
+
+
+p#disclaimer{
+  display: block;
+  @include font-size($sizeValue:1.2);
+  padding: 25px 0;
+  text-align: center;
+  width: 100%;
+
+}
+
+#payment-logos li {
+  margin: 0 0 15px 0;
+}

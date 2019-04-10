@@ -1,0 +1,157 @@
+@import '../../../sass/mixins';
+@import '../../../sass/variables';
+
+/*
+    article detail page ////////////////////////////////////////////////////////////////////////////////////////////////
+ */
+
+.article-detail-wrap {
+  @include flex();
+  justify-content: space-between;
+}
+
+.article-image-wrap {
+  flex:1;
+}
+
+.article-detail-content {
+  flex: 1;
+  padding: 0 0 0 25px;
+}
+.article-detail-nr, .article-detail-availability, .article-detail-price {
+  padding: 15px 0 0 0;
+}
+
+.article-detail-rating {
+  padding: 15px 0 0 0;
+}
+
+.article-detail-nr {
+  span {
+    color: $orange;
+  }
+}
+.article-detail-price {
+  @include font-size(2.6);
+  padding:15px 0;
+
+}
+
+.available {
+  color: $green;
+}
+
+@media screen and (max-width: 852px) {
+  .article-detail-wrap {
+    flex-direction: column;
+  }
+  .article-detail-content {
+    padding: 25px 0 0 0;
+  }
+
+}
+
+.article-like {
+  display: block;
+  cursor: pointer;
+
+  .fas {
+    color: $green;
+    &:hover {
+      color: $font-color;
+    }
+  }
+}
+
+/*
+    article detail page ////////////////////////////////////////////////////////////////////////////////////////////////
+ */
+
+.slideshow {
+  position: relative;
+}
+
+.slideshow-icons {
+  @include font-size(1.6);
+  text-align: center;
+  padding: 10px 0 0 0;
+  width: 100%;
+
+}
+
+@media screen and (max-width: 475px) {
+  .slideshow {
+    width: 100%;
+   }
+}
+.slideshow-icons {
+  .fab {
+    padding: 0 10px;
+  }
+}
+.article-detail-img {
+   img {
+    vertical-align: middle;
+  }
+}
+
+.prev, .next {
+  font-weight: bold;
+  font-size: 5rem;
+  position: absolute;
+  top: 50%;
+  color: white;
+  width: auto;
+  padding: 16px;
+  margin-top: -22px;
+  transition: 0.6s ease;
+  border-radius: 0 3px 3px 0;
+  cursor: pointer;
+
+}
+
+.next {
+  right: 0;
+  border-radius: 3px 0 0 3px;
+}
+
+.prev:hover, .next:hover {
+  background-color: rgba(0,0,0,0.8);
+}
+
+.bullets {
+   text-align: center;
+  margin: 5px 0;
+}
+
+.bullet {
+  display: inline-block;
+  background-color: lighten( $green, 10% );
+  height: 15px;
+  width: 15px;
+  margin: 0 2px;
+  border-radius: 50%;
+  transition: background-color 0.6s ease;
+  cursor: pointer;
+
+}
+
+.active, .dot:hover {
+  background-color: darken( $green, 10% );
+}
+
+.fade {
+  -webkit-animation-name: fade;
+  -webkit-animation-duration: 0.2s;
+  animation-name: fade;
+  animation-duration: 0.2s;
+}
+
+@-webkit-keyframes fade {
+  from {opacity: .8}
+  to {opacity: 1}}
+
+@keyframes fade {
+  from {opacity: .8}
+  to {opacity: 1}}
+

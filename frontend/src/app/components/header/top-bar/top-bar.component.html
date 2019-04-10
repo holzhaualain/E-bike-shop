@@ -1,0 +1,81 @@
+<div class="bg-top-bar">
+  <div class="top-bar-nav">
+    <app-login-info></app-login-info>
+    <app-lang-switch></app-lang-switch>
+
+  </div><!-- end .top-bar-nav -->
+
+  <div class="logo-wrap" (click)="goToHome()">
+    <div class="big-letter">E</div>
+    <div class="line"><div class="hyphen"></div></div>
+    <div class="first-word">The</div>
+    <div class="second-word">bike</div>
+    <div class="third-word">store</div>
+</div><!-- end .bg-top-bar -->
+<div class="logo-mobile"><h2>The E-Bike Store</h2></div>
+  <div class="row">
+<div class="top-bar" [ngClass]="{'position-fixed': currentWindowWidth <= 562 && windowTopPosition > 155}">
+  <div class="top-bar-contact">
+    <ul>
+      <li>
+        <i class="fas fa-phone"></i><a href="tel:+41 44 123 45 67">T +41 44 187 89 65</a>
+      </li>
+      <li>
+        <i class="fas fa-envelope"></i><a href="mailto:info@e-bike-store.ch">info@e-bike-store.ch</a>
+      </li>
+    </ul>
+  </div><!-- end .top-bar-contact -->
+  <div class="top-bar-service">
+    <ul class="top-service-wrap">
+      <li class="top-service-element">
+        <a [routerLink]="['/shopping-basket/']" ><i class="fas fa-shopping-cart cart-top"></i></a>
+        <span class="basket-link"
+           [matMenuTriggerFor]="menu" matBadge="{{shoppingBasketService.shoppingBasket?.items.length}}"
+           matBadgeOverlap="false" matBadgeSize="medium"><span class="hidden-ms">{{'SHOPPING-BASKET' | translate}}</span>
+            <span class=" hidden-ms" *ngIf="shoppingBasketService.shoppingBasket?.totalSum !== 0">
+                CHF {{shoppingBasketService.shoppingBasket?.totalSum | amountConverter}}
+            </span>
+          <span class=" hidden-ms" *ngIf="shoppingBasketService.shoppingBasket?.totalSum == 0">
+            0.00
+          </span>
+        </span>
+
+        <mat-menu #menu="matMenu">
+         <div *ngIf="shoppingBasketService.shoppingBasket?.items.length  !== 0">
+
+            <ul *ngFor="let shoppingBasketItem of shoppingBasketService.shoppingBasket?.items let i=index; last as isLast">
+              <li *ngIf="i < 4 ">
+                <a [routerLink]="['/article-detail/']" [queryParams]="{article:shoppingBasketItem.articleQueryParameter | trim}">
+                  {{shoppingBasketItem.articleAmount}}x
+                {{shoppingBasketItem.articleName}}</a><br>
+               <span class="overview-price">CHF {{shoppingBasketItem.articlePrice | amountConverter}}</span>
+              </li>
+
+               <li *ngIf=" isLast && i > 3">
+                 und {{shoppingBasketService.shoppingBasket?.items.length - 4 }} weitere(r) Artikel
+               </li>
+
+            </ul>
+
+          <br>
+           <p *ngIf="shoppingBasketService.shoppingBasket?.totalSum"> <span class="overview-price"><strong>{{'SUBTOTAL' | translate}}</strong></span><br>
+             <span class="overview-price">CHF {{shoppingBasketService.shoppingBasket.totalSum | amountConverter}}</span></p>
+         <br>
+             <a role="button" attr.title="{{'SHOPPING-BASKET' | translate}}" [routerLink]="['/shopping-basket/']" attr.aria-label="{{'SHOPPING-BASKET' | translate}}" class="btn form-btn mat-menu-btn"  >
+              <i class="fas fa-shopping-cart"></i>{{'SHOPPING-BASKET' | translate}}</a>
+         </div>
+          <div *ngIf="shoppingBasketService.shoppingBasket?.items.length  === 0"  >
+            <p>{{'SHOPPING-BASKET-IS-EMPTY' | translate}}</p>
+          </div>
+        </mat-menu>
+
+      </li>
+
+      <li class="top-service-element">
+        <app-search></app-search>
+      </li>
+    </ul>
+  </div><!-- end #top-bar-service -->
+</div><!-- end #top-bar -->
+</div>
+</div><!-- end .row -->

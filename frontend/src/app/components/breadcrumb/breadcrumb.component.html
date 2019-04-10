@@ -1,0 +1,17 @@
+<ul class="breadcrumb">
+
+  <li><a  routerLink="/">{{'HOME' | translate}}</a></li>
+
+  <ng-container *ngIf="breadcrumbPath[0].mainUrl !== '' ">
+    <li><a  routerLink="/{{breadcrumbPath[0].mainUrl}}">{{breadcrumbPath[0].breadcrumbTranslated}}</a></li>
+  </ng-container>
+
+  <ng-container *ngIf="breadcrumbPath[0].mainUrl == '' ">
+    <li>{{breadcrumbPath[0].breadcrumbTranslated}}</li>
+  </ng-container>
+
+  <ng-container *ngIf="firstParam !== 'undefinied' ">
+    <li>{{firstParam | detrim}}</li>
+  </ng-container>
+</ul>
+

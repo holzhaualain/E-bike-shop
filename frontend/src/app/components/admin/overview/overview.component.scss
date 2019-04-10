@@ -1,0 +1,41 @@
+@import '../../../../sass/mixins.scss';
+@import '../../../../sass/variables.scss';
+
+
+/*
+    admin area ////////////////////////////////////////////////////////////////////////////////////////////////
+ */
+
+
+.role {
+  margin: 0 0 13px 0;
+}
+
+
+.accordion-table {
+  width: 100%;
+}
+
+.accordion-table th{
+  @include base-font-style();
+  background: #fff;
+  color: $font-color;
+  font-weight: $font-weight-medium;
+  padding: 10px 24px ;
+}
+.accordion-table thead th, .accordion-table thead td {
+  width: auto;
+
+}
+
+.accordion-table tbody th, .accordion-table tbody td {
+  width: auto;
+  padding:0;
+
+}
+
+@media screen and (max-width: 455px){
+  .accordion-table th {
+    display: none;
+  }
+}

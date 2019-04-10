@@ -1,0 +1,142 @@
+<div class="row">
+  <app-breadcrumb></app-breadcrumb>
+  <h2>{{'MY-ORDER' | translate}}</h2>
+  <mat-vertical-stepper [linear]="isLinear" #stepper (selectionChange)="onSelectionChange()" >
+    <ng-template matStepperIcon="edit">
+      <mat-icon><i class="fas fa-pen stepper-edit"></i></mat-icon>
+    </ng-template>
+    <mat-step [stepControl]="deliveryAddress">
+      <ng-template matStepLabel>{{'DELIVERY-ADDRESS' | translate}}</ng-template>
+      <form [formGroup]="deliveryAddress">
+        <mat-form-field class="checkout-field">
+          <input aria-label="name" matInput placeholder="{{'FIRST-NAME' | translate}}" formControlName="givenname" required>
+          <mat-icon matSuffix><mat-icon matSuffix><i class="far fa-grin-beam form-icon"></i></mat-icon>
+          </mat-icon>
+        </mat-form-field>
+        <br>
+        <mat-form-field class="checkout-field">
+          <input aria-label="surname" matInput placeholder="{{'LAST-NAME' | translate}}" formControlName="surname" required>
+          <mat-icon matSuffix><mat-icon matSuffix><i class="far fa-grin-beam form-icon"></i></mat-icon>
+          </mat-icon>
+        </mat-form-field>
+        <br>
+        <mat-form-field class="checkout-field">
+          <input aria-label="street" matInput placeholder="{{'STREET-AND-HOUSE-NUMBER' | translate}}" formControlName="streetHousenumber"
+                 required>
+          <mat-icon matSuffix><i class="fas fa-home form-icon"></i></mat-icon>
+
+        </mat-form-field>
+        <br>
+        <mat-form-field class="checkout-field">
+          <input aria-label="post code" matInput placeholder="{{'POST-CODE' | translate}}" maxlength="4" minlength="4"
+                 formControlName="postCode" required>
+          <mat-icon matSuffix><i class="fas fa-home form-icon"></i></mat-icon>
+
+        </mat-form-field>
+        <br>
+        <mat-form-field class="checkout-field">
+          <input aria-label="city" matInput placeholder="{{'CITY' | translate}}" formControlName="city" required>
+          <mat-icon matSuffix><i class="fas fa-city form-icon"></i></mat-icon>
+
+        </mat-form-field>
+        <br>
+        <div class="checkout-nav">
+          <button attr.aria-label="{{'NEXT' | translate}}" mat-button matStepperNext class="btn matStepperNext btn-checkout ">{{'NEXT' | translate}}</button>
+        </div>
+      </form>
+    </mat-step>
+    <mat-step [stepControl]="contactData">
+      <ng-template matStepLabel>{{'CONTACT-DETAILS' | translate}}</ng-template>
+      <form [formGroup]="contactData">
+        <mat-form-field class="checkout-field">
+          <input aria-label="email" matInput placeholder="{{'E-MAIL' | translate}}" formControlName="email" type="email" required>
+          <mat-icon matSuffix> <mat-icon matSuffix><i class="fas fa-envelope form-icon"></i></mat-icon></mat-icon>
+        </mat-form-field>
+        <br>
+        <mat-form-field class="checkout-field">
+          <input  aria-label="phone" matInput placeholder="{{'PHONE' | translate}} (+41 ....)" formControlName="phone" required>
+          <mat-icon matSuffix><i class="fas fa-phone form-icon"></i></mat-icon>
+        </mat-form-field>
+        <br>
+        <div class="nav-wrap">
+        <div class="checkout-nav">
+          <button attr.aria-label="{{'NEXT' | translate}}" mat-button matStepperNext class="btn matStepperNext btn-checkout ">{{'NEXT' | translate}}</button>
+        </div>
+        </div><!-- end .nav-wrap -->
+      </form>
+    </mat-step>
+    <mat-step [stepControl]="deliveryType">
+      <ng-template matStepLabel>{{'DELIVERY' | translate}}</ng-template>
+      <form [formGroup]="deliveryType">
+        <p>{{'WE-SHIP-EXCLUSIVELY-WITH-SWISS-POST' | translate}}</p><br>
+        <mat-radio-group formControlName="delivery" aria-label="delivery">
+          <mat-radio-button aria-label="PostPac Priority" value="PostPac Priority">PostPac Priority CHF 15.00</mat-radio-button>
+          <br>
+          <mat-radio-button aria-label="PostPac Economy" value="PostPac Economy">PostPac Economy CHF 15.00</mat-radio-button>
+          <br>
+        </mat-radio-group>
+        <br>
+        <div class="nav-wrap">
+        <div class="checkout-nav">
+          <button attr.aria-label="{{'NEXT' | translate}}" mat-button matStepperNext class="btn matStepperNext btn-checkout ">{{'NEXT' | translate}}</button>
+        </div>
+        </div><!-- end .nav-wrap -->
+      </form>
+    </mat-step>
+    <mat-step [stepControl]="paymentType">
+      <ng-template matStepLabel>{{'PAYING-WITH' | translate}}</ng-template>
+      <form [formGroup]="paymentType">
+        <mat-radio-group aria-label="payment" formControlName="payment">
+          <mat-radio-button aria-label="Paypal" value="Paypal">Paypal</mat-radio-button>
+          <br>
+          <mat-radio-button aria-label="Mastercard" value="Mastercard">Mastercard</mat-radio-button>
+          <br>
+          <mat-radio-button aria-label="Visa" value="Visa">Visa</mat-radio-button>
+
+        </mat-radio-group>
+        <br>
+        <div class="nav-wrap">
+        <div class="checkout-nav">
+          <button attr.aria-label="{{'NEXT' | translate}}" mat-button matStepperNext class="btn matStepperNext btn-checkout ">{{'NEXT' | translate}}</button>
+        </div>
+      </div><!-- end .nav-wrap -->
+      </form>
+    </mat-step>
+    <mat-step id="checkout-review">
+      <ng-template matStepLabel>{{'OVERVIEW' | translate}}</ng-template>
+      <div class="order-review">
+        <br>
+        <h4>{{'MY-ORDER-DATA' | translate}}</h4>
+        <p><span>{{'FIRST-NAME' | translate}}: </span>{{deliveryAddress.getRawValue().givenname}}</p>
+        <p><span>{{'LAST-NAME' | translate}}: </span>{{deliveryAddress.getRawValue().surname}}</p>
+        <p><span>{{'STREET' | translate}}: </span>{{deliveryAddress.getRawValue().streetHousenumber}}</p>
+        <p><span>{{'POST-CODE' | translate}}: </span>{{deliveryAddress.getRawValue().postCode}}</p>
+        <p><span>{{'CITY' | translate}}: </span>{{deliveryAddress.getRawValue().city}}</p>
+        <br>
+        <p><span>{{'E-MAIL' | translate}}: </span>{{contactData.getRawValue().email}}</p>
+        <p><span>{{'PHONE' | translate}}: </span>{{contactData.getRawValue().phone}}</p>
+        <br>
+        <p><span>{{'DELIVERY' | translate}}: </span>{{deliveryType.getRawValue().delivery}}</p>
+        <br>
+        <p><span>{{'PAYING-WITH' | translate}}: </span>{{paymentType.getRawValue().payment}}</p>
+        <br>
+      </div>
+      <div>
+        <app-shopping-basket-listing [itemChangePossible]='itemChangePossible' [isCheckout]="true"></app-shopping-basket-listing>
+      </div><!-- end article listing -->
+      <div  class="cart-next-wrap">
+        <div class="checkout-nav">
+           <button attr.aria-label="{{'RESET' | translate}}" mat-button (click)="stepper.reset()" class="matStepperReset">{{'RESET' | translate}}</button>
+        </div>
+
+        <form *ngIf="shoppingBasketService.shoppingBasket?.items.length>0" #fCreateOrder="ngForm" (ngSubmit)="approveOrder().then() ">
+          <p>
+            <button attr.aria-label="{{'ORDER-NOW' | translate}}" class="btn form-btn" type="submit"><i class="fas form-btn"></i>{{'ORDER-NOW' | translate}}</button>
+          </p>
+        </form>
+      </div>
+    </mat-step>
+
+
+  </mat-vertical-stepper>
+</div><!-- end .row -->

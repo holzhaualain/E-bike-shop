@@ -1,0 +1,27 @@
+<div class="row clearfix">
+  <app-breadcrumb></app-breadcrumb>
+
+  <h2>{{'SHOPPING-BASKET' | translate}}</h2>
+  <div *ngIf="shoppingBasketService.shoppingBasket?.items.length !==0">
+    <div class="cart-items-listing">
+
+      <app-shopping-basket-listing [isBasket]="true"
+        (itemChange)="changeItemAmount_ShoppingBasket($event.articleId, $event.articleName, $event.articleAmount )"
+        (deleteItem)="confirmDelete($event.articleId, $event.articleName )" [itemChangePossible]= 'itemChangePossible'>
+
+      </app-shopping-basket-listing>
+    </div><!-- end .cart-items-listing -->
+
+    <div class="cart-next-wrap">
+         <p>
+          <a type="button" aria-label="checkout" routerLink="/checkout" class="btn form-btn"><i class="fas fa-shopping-cart"></i>{{'TO-CHECKOUT' | translate}}</a>
+        </p>
+       <p><a role="link" routerLink="/article-listing" class="continue-shopping">{{'CONTINUE-SHOPPING' | translate}}</a></p>
+    </div>
+   </div>
+  <p *ngIf="shoppingBasketService.shoppingBasket?.items.length ==0">
+    <strong>{{'SHOPPING-BASKET-IS-EMPTY' | translate}}</strong><br>
+    <a role="link" routerLink="/article-listing" class="continue-shopping">{{'VIEW-OUR-ARTICLES' | translate}}</a>
+  </p>
+</div><!-- end .row -->
+

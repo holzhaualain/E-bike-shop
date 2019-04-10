@@ -1,0 +1,12 @@
+<form class="search-form" role="search" method="get" name="search" action="">
+  <mat-form-field class="example-full-width top-bar-search">
+    <input matInput placeholder="{{'SEARCH-FOR-ARTICLES' | translate}}" aria-label="['SEARCH-FOR-ARTICLES' | translate]"
+           [matAutocomplete]="auto" [formControl]="stateCtrl" >
+    <mat-autocomplete #auto="matAutocomplete" >
+      <mat-option *ngFor="let article of articles$ | async" [value]="article.name" (onSelectionChange)="onSelected(article)">
+        <a [routerLink]="['/article-detail/']" [queryParams]="{article:article.articleQueryParameter | trim}"><span>{{article.name}}</span></a>
+      </mat-option>
+    </mat-autocomplete>
+  </mat-form-field>
+   <a [routerLink]="['/search-results/']" [queryParams]="{search:stateCtrl.value}"><i class="fas fa-search"></i></a>
+</form>

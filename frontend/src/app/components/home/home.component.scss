@@ -1,0 +1,57 @@
+@import '../../../sass/mixins.scss';
+@import '../../../sass/variables.scss';
+
+
+/*
+    home content ////////////////////////////////////////////////////////////////////////////////////////////////
+ */
+
+h2.claim {
+    @include font-size(3.2);
+    font-weight: $font-weight-light;
+    display: block;
+    text-align: center;
+    width: 100%;
+    max-width: 800px;
+    padding: 1px 0; /* IE overflow fix */
+    margin: 0 auto;
+
+}
+
+.frontpage-content-row {
+  width: 100%;
+  min-height: 386px;
+  margin: 0 0 80px 0;
+  clear: both;
+
+}
+
+.frontpage-content {
+  img {
+    width: 40%;
+    height: auto;
+    padding:  0 15px 0 15px;
+    border-radius: 50%;
+    shape-outside: circle(50%);
+  }
+}
+
+.frontpage-content {
+  h3 {
+    @include font-size(3.2);
+    font-weight: $font-weight-light;
+  }
+}
+
+
+@media screen and (max-width: 492px) {
+
+  .frontpage-content {
+    img {
+      float: none;
+      width: 100%;
+      margin: 0 0 25px 0;
+    }
+  }
+
+}

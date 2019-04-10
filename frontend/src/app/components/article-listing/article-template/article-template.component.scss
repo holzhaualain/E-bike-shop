@@ -1,0 +1,45 @@
+@import '../../../../sass/mixins';
+@import '../../../../sass/variables';
+
+
+/*
+    article-template ////////////////////////////////////////////////////////////////////////////////////////////////////////////
+ */
+
+
+.article-content {
+  border: 1px solid #CFD4E6;
+  border-radius: 5px;
+  transition: all .2s ease-in-out;
+  cursor:pointer;
+}
+
+.article-content:hover {
+  transform: scale(1.02);
+  box-shadow: #CFD4E6;
+}
+
+.article-img {
+  margin: 0 0 5px;
+  border-radius: 5px 5px 0 0;
+}
+
+.article-data {
+  padding: 5px;
+}
+
+
+.article-listing-title {
+  font-weight: $font-weight-medium;
+}
+
+.article-listing-descr {
+  @include font-size($sizeValue:1.6);
+  color: #818A91;
+}
+
+.article-listing-price {
+  display: block;
+  padding: 25px 0 0 0;
+
+}

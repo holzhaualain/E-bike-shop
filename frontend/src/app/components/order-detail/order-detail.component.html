@@ -1,0 +1,26 @@
+<div class="row">
+  <h2 aria-label="confirm title">{{'THANK-YOU-FOR-YOUR-ORDER' | translate}}!</h2>
+  <p>{{'YOUR-ORDER-IS-BEING-PROCESSED' | translate}}</p>
+
+  <br><br>
+  <div id="order-review">
+    <h4>{{'MY-ORDER-DATA' | translate}}</h4>
+    <p><span class="review-data">{{'FIRST-NAME' | translate}}: </span>{{order?.deliveryAddress.givenname }} </p>
+    <p><span class="review-data">{{'LAST-NAME' | translate}}: </span>{{order?.deliveryAddress.surname}} </p>
+    <p><span class="review-data">{{'STREET' | translate}}: </span> {{order?.deliveryAddress.streetHousenumber}}</p>
+    <p><span class="review-data">{{'POST-CODE' | translate}}: </span>{{order?.deliveryAddress.postCode}} </p>
+    <p><span class="review-data">{{'CITY' | translate}}: </span>{{order?.deliveryAddress.city}} </p>
+    <br>
+    <p><span class="review-data">{{'E-MAIL' | translate}}: </span>{{order?.contactData.email}}</p>
+    <p><span class="review-data">{{'PHONE' | translate}}: </span>{{order?.contactData.phone}} </p>
+    <br>
+    <p><span class="review-data">{{'DELIVERY' | translate}}: </span>{{order?.deliveryType.delivery}}</p>
+    <br>
+    <p><span class="review-data">{{'PAYING-WITH' | translate}}: </span>{{order?.paymentType.payment}}</p>
+    <br><br><br>
+  </div>
+  <h4>{{'ORDERED-ITEMS' | translate}}</h4>
+
+  <app-shopping-basket-listing [isOrderDetail]="true" [order]="order"></app-shopping-basket-listing>
+
+</div>

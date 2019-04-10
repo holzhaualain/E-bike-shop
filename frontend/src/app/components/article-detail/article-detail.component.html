@@ -1,0 +1,93 @@
+<div class="row">
+  <app-breadcrumb></app-breadcrumb>
+
+  <h2>{{article?.brand}}</h2>
+  <div class="article-detail-wrap">
+    <div class="article-image-wrap">
+      <div class="slideshow">
+        <div class="slideshow">
+          <div class="article-detail-img fade">
+            <img src="{{articleURLs?.img01}}" width="100%" height="auto" alt="{{article?.name}}">
+          </div><!-- end .article-img -->
+          <div class="article-detail-img fade">
+            <img src="{{articleURLs?.img02}}" width="100%" height="auto" alt="{{article?.name}}">
+          </div><!-- end .article-img -->
+          <div class="article-detail-img fade">
+            <img src="{{articleURLs?.img03}}" width="100%" height="auto" alt="{{article?.name}}">
+          </div><!-- end .article-img -->
+          <a class="prev" (click)="plusSlides(-1)">&#10094;</a>
+          <a class="next" (click)="plusSlides(1)">&#10095;</a>
+
+        </div><!-- end .slideshow -->
+      </div>
+      <div class="slideshow-icons">
+        <div class="bullets">
+          <span class="bullet" (click)="currentSlide(1)"></span>
+          <span class="bullet" (click)="currentSlide(2)"></span>
+          <span class="bullet" (click)="currentSlide(3)"></span>
+        </div>
+
+        <p>{{'SHARE-ARTICLE' | translate}}
+          <a href="#" target="_blank"><i class="fab fa-twitter"></i></a>
+          <a href="#" target="_blank"><i class="fab fa-facebook-f"></i></a>
+          <a href="#" target="_blank"><i class="fab fa-pinterest"></i></a>
+          <ng-container *ngIf="userService.getUser()">
+            <span class="article-like">
+              {{'LIKE' | translate}}<i (click)="onChangeArticleRating(true)" class="fas fa-thumbs-up"></i>
+              {{'DISLIKE' | translate}}<i (click)="onChangeArticleRating(false)" class="fas fa-thumbs-down"></i>
+            </span>
+          </ng-container>
+        </p>
+      </div>
+    </div><!-- end .article-image-wrap -->
+
+    <div class="article-detail-content">
+      <h3>{{article?.name }}</h3>
+      <ng-container *ngIf="langService.selectedLanguage==='de'">
+        <p>{{article?.descriptionDE}}</p>
+      </ng-container>
+      <ng-container *ngIf="langService.selectedLanguage==='en'">
+        <p>{{article?.descriptionEN}}</p>
+      </ng-container>
+
+      <div class="article-detail-rating">
+      <span *ngFor="let rating of article?.rating; index as i ">
+        <i class="fas fa-star" *ngIf="rating"></i>
+        <i class="far fa-star" *ngIf="!rating"></i>
+      </span>
+      </div>
+
+      <p class="article-detail-nr">{{'ITEM-NUMBER' | translate}} <span>{{article?.itemNumber}}</span></p>
+      <p *ngIf='article?.availability' class="article-detail-availability available">{{'ON-STOCK' | translate}}</p>
+      <p *ngIf='!article?.availability' class="article-detail-availability available">
+        {{'WILL-BE-DELIVERED-WITHIN-THREE-WEEKS' | translate}}</p>
+      <p class="article-detail-price">CHF {{article?.price | amountConverter}}</p>
+
+      <p>
+        <mat-form-field>
+          <mat-select title="{{'PLEASE-CHOOSE-AMOUNT' | translate}}"
+                      placeholder="{{'PLEASE-CHOOSE-AMOUNT' | translate}}"
+                      [(ngModel)]="selectedValue"
+                      (selectionChange)="onSelectedArticleAmount($event.value)">
+            <mat-option *ngFor="let anzahl of amount" [value]="anzahl.value">
+              {{anzahl.viewValue}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+
+      </p>
+
+      <form class="form" #f1="ngForm" (ngSubmit)="onAddShoppingBasketItem()">
+        <p>
+          <button attr.aria-label="{{'ADD-TO-SHOPPING-BASKET' | translate}}" class="btn form-btn" type="submit"><i
+            class="fas fa-shopping-cart"></i>{{'ADD-TO-SHOPPING-BASKET' |
+            translate}}
+          </button>
+        </p>
+      </form>
+
+      <p><a href="#" class="continue-shopping" routerLink="/article-listing">{{'CONTINUE-SHOPPING' | translate}}</a></p>
+    </div><!-- end #article-detail-content -->
+  </div><!--- end .article-detail-wrap -->
+
+</div><!-- end .row -->

@@ -1,0 +1,364 @@
+<div class="row">
+  <h2>{{'ADMIN' | translate}}</h2>
+
+  <mat-tab-group>
+
+    <mat-tab label="{{'ORDERS' | translate}}">
+      <ng-container *ngIf="orders?.length == 0">
+        <p>{{'NO-ORDERS-FOUND' | translate}}</p>
+      </ng-container>
+
+      <ng-container *ngIf="orders?.length > 0">
+        <mat-accordion>
+          <table class="accordion-table" matSort (matSortChange)="sortData($event)">
+            <thead>
+            <th mat-sort-header="name-order">{{'CUSTOMER' | translate}}</th>
+            <th mat-sort-header="date">{{'DATE' | translate}}</th>
+            <th mat-sort-header="state">{{'ORDER-STATE' | translate}}</th>
+            </thead>
+            <tbody>
+            <tr
+              *ngFor="let order of orders | paginate: { itemsPerPage: 6, currentPage: p, id: 'customer-orders' };">
+              <td class="custom-expansion-panel" colspan="3"
+                  *ngIf="(order.state =='APPROVED' || order.state =='COMPLETED' || order.state =='CANCELED') ">
+                <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
+                  <mat-expansion-panel-header>
+                    <mat-panel-description>
+                      <strong>{{'CUSTOMER' | translate}}:&nbsp;</strong>
+                      {{order?.deliveryAddress.givenname}}
+                      {{order?.deliveryAddress.surname}}
+                    </mat-panel-description>
+                    <mat-panel-description>
+                      <strong>{{'ORDERED-ON' | translate}}: </strong>&nbsp;{{order?.orderDate | date:'dd.MM.yyyy' }}
+                    </mat-panel-description>
+                    <mat-panel-description>
+                      <strong>{{'STATE' | translate}}:&nbsp;</strong>{{order?.state | translate }}
+                    </mat-panel-description>
+                    <mat-panel-description>
+                      <span class="warning hidden {{order._id}}">{{'WARNING-ORDER-CHANGED' | translate}}</span>
+                    </mat-panel-description>
+                  </mat-expansion-panel-header>
+                  <div class="customer-order">
+                    <form #orderForm="ngForm" class="form-customer-data">
+
+                      <div class="customer-data">
+                        <h4>{{'PARTICULARS' | translate}}</h4>
+                        <input type="hidden" name="_id" [(ngModel)]="order._id" #_id>
+                        <input type="hidden" name="userID" [(ngModel)]="order.userID" #userID>
+                        <p>
+                          <span class="review-data">{{'FIRST-NAME' | translate}}: </span>
+                          <mat-form-field class="customer-data-input">
+                            <input aria-label="name" matInput placeholder=""
+                                   (change)="onFormChange(order._id);"
+                                   name="givenname"
+                                   [(ngModel)]="order?.deliveryAddress.givenname"
+                                   #givenname
+                                   required>
+                            <mat-icon matSuffix><i class="far fa-grin-beam form-icon"></i></mat-icon>
+
+                          </mat-form-field>
+                        </p>
+
+                        <p><span class="review-data">{{'LAST-NAME' | translate}}: </span>
+                          <mat-form-field class="customer-data-input">
+                            <input aria-label="surname" matInput placeholder=""
+                                   (change)="onFormChange(order._id);"
+                                   name="surname"
+                                   [(ngModel)]="order?.deliveryAddress.surname"
+                                   #surname
+                                   required>
+                            <mat-icon matSuffix><i class="far fa-grin-beam form-icon"></i></mat-icon>
+
+                          </mat-form-field>
+                        </p>
+                        <p><span class="review-data">{{'STREET' | translate}}: </span>
+                          <mat-form-field class="customer-data-input">
+                            <input aria-label="street" matInput placeholder=""
+                                   (change)="onFormChange(order._id);"
+                                   name="streetHousenumber"
+                                   [(ngModel)]=" order?.deliveryAddress.streetHousenumber"
+                                   #streetHousenumber
+                                   required>
+                            <mat-icon matSuffix><i class="fas fa-home form-icon"></i></mat-icon>
+
+                          </mat-form-field>
+                        </p>
+                        <p><span class="review-data">{{'POST-CODE' | translate}}: </span>
+                          <mat-form-field class="customer-data-input">
+                            <input aria-label="post code" matInput placeholder=""
+                                   (change)="onFormChange(order._id);"
+                                   name="postCode"
+                                   [(ngModel)]="order?.deliveryAddress.postCode"
+                                   #postCode
+                                   required>
+                            <mat-icon matSuffix><i class="fas fa-home form-icon"></i></mat-icon>
+
+                          </mat-form-field>
+                        </p>
+                        <p><span class="review-data">{{'CITY' | translate}}: </span>
+                          <mat-form-field class="customer-data-input">
+                            <input aria-label="city" matInput placeholder=""
+                                   (change)="onFormChange(order._id);"
+                                   name="city"
+                                   [(ngModel)]="order?.deliveryAddress.city"
+                                   #city
+                                   required>
+                            <mat-icon matSuffix><i class="fas fa-city form-icon"></i></mat-icon>
+
+                          </mat-form-field>
+                        </p>
+
+                        <p><span class="review-data">{{'E-MAIL' | translate}}: </span>
+                          <mat-form-field class="customer-data-input">
+                            <input aria-label="e-mail" matInput placeholder=""
+                                   (change)="onFormChange(order._id);"
+                                   name="email"
+                                   [(ngModel)]="order?.contactData.email"
+                                   #email
+                                   required>
+                            <mat-icon matSuffix> <mat-icon matSuffix><i class="fas fa-envelope form-icon"></i></mat-icon></mat-icon>
+                          </mat-form-field>
+                        </p>
+                        <p><span class="review-data">{{'PHONE' | translate}}: </span>
+                          <mat-form-field class="customer-data-input">
+                            <input aria-label="phone" matInput placeholder=""
+                                   (change)="onFormChange(order._id);"
+                                   name="phone"
+                                   [(ngModel)]="order?.contactData.phone"
+                                   #phone
+                                   required>
+                            <mat-icon matSuffix><i class="fas fa-phone form-icon"></i></mat-icon>
+                          </mat-form-field>
+                        </p>
+
+                        <p><span class="review-data">{{'DELIVERY' | translate}}: </span>
+                          <mat-form-field class="customer-data-input">
+
+
+                            <mat-select aria-label="delivery type" name="delivery"
+                                        placeholder=" "
+                                        [(ngModel)]="order?.deliveryType.delivery"
+                                        (selectionChange)="onFormChange(order._id);">
+                              <mat-option *ngFor="let delivery of deliveryMethod" [value]="delivery.value">
+                                {{delivery.viewValue}}
+                              </mat-option>
+                            </mat-select>
+                            <mat-icon matSuffix><i class="fas fa-truck form-icon"></i></mat-icon>
+                          </mat-form-field>
+                        </p>
+
+                        <p><span class="review-data">{{'PAYING-WITH' | translate}}: </span>
+                          <mat-form-field>
+                            <mat-select aria-label="payment" name="payment"
+                                        placeholder=" "
+                                        [(ngModel)]="order.paymentType.payment"
+                                        (selectionChange)="onFormChange(order._id);">
+                              <mat-option *ngFor="let pay of paymentMethod" [value]="pay.value">
+                                {{pay.viewValue}}
+                              </mat-option>
+                            </mat-select>
+                            <mat-icon matSuffix><i class="far fa-credit-card form-icon"></i></mat-icon>
+                          </mat-form-field>
+                        </p>
+                        <br><br>
+                        <p>
+                          <mat-form-field>
+                            <mat-select aria-label="order state" name="state"
+                                        placeholder="{{'CHANGE-ORDER-STATE' | translate}}"
+                                        [(ngModel)]="order.state"
+                                        (selectionChange)="onFormChange(order._id);">
+                              <mat-option *ngFor="let state of orderState" [value]="state.value">
+                                {{state.viewValue}}
+                              </mat-option>
+                            </mat-select>
+                          </mat-form-field>
+                        </p>
+
+                      </div><!-- end .customer-data -->
+                      <div class="order-customer-articles">
+
+                        <h4>{{'ORDERED-ITEMS' | translate}}</h4>
+                        <div class="order-item-listing">
+                          <div class="order-item" *ngFor="let articles of order?.shoppingBasket.items">
+
+                            <p><span class="order-article-attr">{{'ITEM-NUMBER' | translate}}:</span>{{articles.itemNumber}}
+                            </p>
+                            <p><span class="order-article-attr">{{'ARTICLE' | translate}}:</span>{{articles.articleName}}
+                            </p>
+                            <p><span class="order-article-attr">{{'AMOUNT' | translate}}:</span>{{articles.articleAmount}}
+                            </p>
+                            <p><span class="order-article-attr">{{'PRICE' | translate}}:</span>CHF
+                              {{articles.articlePrice | amountConverter}}</p>
+                            <p><span class="order-article-attr">{{'SUM-ARTICLE' | translate}}:</span>CHF
+                              {{articles.articlePrice * articles.articleAmount | amountConverter}}</p>
+                          </div><!-- end .order-item -->
+                        </div><!-- end .order-item-listing -->
+                        <p><span class="order-article-attr">{{'TOTAL' | translate}}</span>CHF
+                          {{order?.shoppingBasket.totalSum | amountConverter}}</p>
+                      </div><!-- end .order-customer-articles -->
+                    </form>
+                  </div><!-- end .customer-data -->
+                  <p>
+                    <button attr.aria-label="{{'ORDER-SAVE' | translate}}" (click)="onUpdateOrder(orderForm)"
+                            class="btn form-btn" type="submit"><i class="fas form-btn"></i>{{'ORDER-SAVE' | translate}}
+                    </button>
+                    <button attr.aria-label="{{'ORDER-DELETE' | translate}}"
+                            (click)="onConfirmDelete(order._id, 'orderDelete')" class="btn form-btn btn-warning"
+                            type="submit"><i class="fas form-btn"></i>{{'ORDER-DELETE' | translate}}
+                    </button>
+                  </p>
+                </mat-expansion-panel>
+              </td>
+
+            </tr>
+            </tbody>
+            <tfoot>
+            <tr>
+              <td colspan="3"><br>
+                <pagination-controls
+                  id="customer-orders"
+                  (pageChange)="p = $event"
+                  previousLabel="{{'BACK' | translate}}"
+                  nextLabel="{{'NEXT' | translate}}"></pagination-controls>
+              </td>
+            </tr>
+            </tfoot>
+          </table>
+        </mat-accordion>
+      </ng-container>
+    </mat-tab><!-- end tab Bestellungen -->
+
+    <mat-tab label="{{'USERS' | translate}}">
+      <ng-container *ngIf="users?.length == 0">
+        <p>{{'NO-USERS-FOUND' | translate}}</p>
+      </ng-container>
+      <ng-container *ngIf="users?.length > 0">
+        <mat-accordion>
+          <table class="accordion-table" matSort (matSortChange)="sortData($event)">
+            <thead>
+            <tr>
+              <th mat-sort-header="user-name">{{'USERS' | translate}}</th>
+
+            </tr>
+            </thead>
+            <tbody>
+            <tr
+              *ngFor="let user of users | paginate: { itemsPerPage: 6, currentPage: t, id: 'users-data' }; ">
+              <td>
+                <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
+                  <mat-expansion-panel-header>
+                    <mat-panel-title>
+                      <strong>{{'USER' | translate}}:&nbsp;</strong>
+                      {{user?.name}}
+                      {{user?.firstname}}
+                    </mat-panel-title>
+                    <mat-panel-description>
+                      <span class="warning hidden {{user._id}}">{{'WARNING-USER-CHANGED' | translate}}</span>
+                    </mat-panel-description>
+                  </mat-expansion-panel-header>
+                  <div class="customer-order">
+                    <form #userForm="ngForm" class="form-customer-data ">
+                      <div class="customer-data">
+                        <h4>{{'PARTICULARS' | translate}}</h4>
+                        <input type="hidden" name="user_id" [(ngModel)]="user._id" #user_id>
+                        <p>
+                          <span class="review-data">{{'FIRST-NAME' | translate}}: </span>
+                          <mat-form-field class="customer-data-input">
+                            <input matInput placeholder=""
+                                   (change)="onFormChange(user._id);"
+                                   name="name"
+                                   [(ngModel)]="user.name"
+                                   #name
+                                   required>
+                            <mat-icon matSuffix><i class="far fa-grin-beam form-icon"></i></mat-icon>
+                          </mat-form-field>
+                        </p>
+                        <p>
+                          <span class="review-data">{{'LAST-NAME' | translate}}: </span>
+                          <mat-form-field class="customer-data-input">
+                            <input matInput placeholder=""
+                                   (change)="onFormChange(user._id);"
+                                   name="firstname"
+                                   [(ngModel)]="user.firstname"
+                                   #firstname
+                                   required>
+                            <mat-icon matSuffix><i class="far fa-grin-beam form-icon"></i></mat-icon>
+                          </mat-form-field>
+                        </p>
+                        <p>
+                          <span class="review-data">{{'E-MAIL' | translate}}: </span>
+                          <mat-form-field class="customer-data-input">
+                            <input matInput placeholder=""
+                                   (change)="onFormChange(user._id);"
+                                   name="email"
+                                   [(ngModel)]="user.email"
+                                   #email
+                                   required>
+                            <mat-icon matSuffix> <mat-icon matSuffix><i class="fas fa-envelope form-icon"></i></mat-icon></mat-icon>
+                          </mat-form-field>
+                        </p>
+                        <p>
+                          <span class="review-data">{{'PASSWORD' | translate}}: </span>
+                          <mat-form-field class="customer-data-input">
+                            <input matInput placeholder=""
+                                   (change)="onFormChange(user._id);"
+                                   name="pwd"
+                                   (ngModel)="user.pwd"
+                                   #pwd
+                                   required>
+                            <mat-icon matSuffix><i class="fas fa-key form-icon"></i></mat-icon>
+                          </mat-form-field>
+                        </p>
+                        <p>
+                          <br>
+                          <span class="review-data role">{{'Role' | translate}}: </span>
+
+                          <mat-form-field>
+                            <mat-select name="type"
+                                        placeholder="{{'CHANGE-USER-TYPE' | translate}}"
+                                        [(ngModel)]="user.type"
+                                        (selectionChange)="onFormChange(user._id);">
+                              <mat-option *ngFor="let type of roles" [value]="type.value">
+                                {{type.viewValue}}
+                              </mat-option>
+                            </mat-select>
+                          </mat-form-field>
+
+                        </p>
+                      </div><!-- end .customer-data -->
+
+                    </form>
+                  </div><!-- end .admin-orders -->
+                  <p>
+                    <button attr.aria-label="{{'USER-SAVE' | translate}}" (click)="onUpdateUser(userForm)"
+                            class="btn form-btn" type="submit"><i class="fas form-btn"></i>{{'USER-SAVE' | translate}}
+                    </button>
+                    <button attr.aria-label="{{'USER-DELETE' | translate}}"
+                            (click)="onConfirmDelete(user._id, 'userDelete')" class="btn form-btn btn-warning"
+                            type="submit"><i class="fas form-btn"></i>{{'USER-DELETE' | translate}}
+                    </button>
+                  </p>
+                </mat-expansion-panel>
+              </td>
+
+            </tr>
+            </tbody>
+            <tfoot>
+            <tr>
+              <td>
+                <br>
+                <pagination-controls
+                  id="users-data"
+                  (pageChange)="t = $event"
+                  previousLabel="{{'BACK' | translate}}"
+                  nextLabel="{{'NEXT' | translate}}"></pagination-controls>
+              </td>
+            </tr>
+            </tfoot>
+          </table>
+        </mat-accordion>
+      </ng-container>
+    </mat-tab>
+
+  </mat-tab-group>
+</div>

@@ -1,0 +1,36 @@
+@import 'variables';
+
+/*
+    mixins  /////////////////////////////////////////////////////////////////////////////////////////////////////////
+ */
+
+@mixin font-size($sizeValue:1.8, $important:"") {
+  font-size: ($sizeValue * $base-font-size);
+  font-size: $sizeValue + rem  + $important;
+}
+
+@mixin line-height($heightValue) {
+  line-height: ($heightValue * $base-font-size);
+  line-height: $heightValue + rem;
+}
+
+@mixin slideIn($keyframe, $time, $option, $delay) {
+  animation: $keyframe $time+s $option ;
+  -webkit-animation: $keyframe $time+s $option;
+  animation-delay: $delay+s;
+}
+
+@mixin base-font-style(){
+  @include font-size(1.8);
+  @include line-height(2.4);
+}
+
+/*
+    mixins presets  /////////////////////////////////////////////////////////////////////////////////////////////////////////
+*/
+
+@mixin flex {
+  display: flex;
+  flex-flow:row wrap;
+}
+
